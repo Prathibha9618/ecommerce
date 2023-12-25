@@ -1,26 +1,27 @@
-package com.ecom.ecommerce.services.auth;
+package com.ecommerce.services.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ecom.ecommerce.dto.SignupRequest;
-import com.ecom.ecommerce.dto.UserDto;
-import com.ecom.ecommerce.entity.User;
-import com.ecom.ecommerce.enums.UserRole;
-import com.ecom.ecommerce.repository.UserRepository;
+import com.ecommerce.dto.SignupRequest;
+import com.ecommerce.dto.UserDto;
+import com.ecommerce.entity.User;
+import com.ecommerce.enums.UserRole;
+import com.ecommerce.repository.UserRepository;
 
 import jakarta.annotation.PostConstruct;
 
 @Service
 public class AuthServiceImpl implements AuthService{
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	@Override
 	public UserDto createUser(SignupRequest signupRequest) {
 		User user = new User();
 		user.setEmail(signupRequest.getEmail());
@@ -31,17 +32,18 @@ public class AuthServiceImpl implements AuthService{
 		System.out.print(signupRequest.getName());
 		System.out.print(signupRequest.getPassword());
 		User createdUser = userRepository.save(user);
-		
-//		System.out.println(createdUser);
+
+		System.out.println(createdUser);
 		UserDto userDto = new UserDto();
 		userDto.setId(createdUser.getId());
-		
+
 		return userDto;
-		
+
 	}
+	@Override
 	public Boolean hasUserWithEmail(String email) {
 		return userRepository.findFirstByEmail(email).isPresent();
-		
+
 	}
 	@PostConstruct
 	public void createAdminAccount() {
@@ -53,10 +55,11 @@ public class AuthServiceImpl implements AuthService{
 			user.setRole(UserRole.ADMIN);
 			user.setPassword(new BCryptPasswordEncoder().encode("admin"));
 			userRepository.save(user);
+			System.out.println("enter");
 		}
 	}
-	
-	
-	
+
+
+
 
 }

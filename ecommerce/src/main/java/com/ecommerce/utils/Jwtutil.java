@@ -1,8 +1,6 @@
-package com.ecom.ecommerce.utils;
+package com.ecommerce.utils;
 
 import java.security.Key;
-
-import java.util.Base64.Decoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +17,9 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class Jwtutil {
-	
+
 	    public static final String SECRET = "413F4428472B4B6250655368566D5970337336763979244226452948404D6351";
-	    
+
 	    public String generateToken(String userName ) {
 	        Map<String, Object> claims = new HashMap<>();
 	        return createToken(claims, userName);
@@ -38,11 +36,11 @@ public class Jwtutil {
 	    private Key getSignKey() {
 	    	byte[] keybytes = Decoders.BASE64.decode(SECRET);
 	    	return Keys.hmacShaKeyFor(keybytes);
-	    }	
+	    }
 	    public String extractUsername(String token){
 	        return extractClaim(token, Claims::getSubject);
 	    }
-	    
+
 	    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
 	        final Claims claims = extractAllClaims(token);
 	        return claimsResolver.apply(claims);
@@ -54,11 +52,11 @@ public class Jwtutil {
 	    private Boolean isTokenExpired(String token) {
 	        return extractExpiration(token).before(new Date());
 	    }
-	    
+
 	    public Date extractExpiration(String token) {
 	        return  extractClaim(token, Claims::getExpiration);
 	    }
-	    
+
 	    public Boolean validateToken(String token, UserDetails userDetails) {
 	        final String username = extractUsername(token);
 	        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

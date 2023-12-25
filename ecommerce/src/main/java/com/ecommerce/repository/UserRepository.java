@@ -1,4 +1,4 @@
-package com.ecom.ecommerce.repository;
+package com.ecommerce.repository;
 
 
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ecom.ecommerce.entity.User;
-import com.ecom.ecommerce.enums.UserRole;
+import com.ecommerce.entity.User;
+import com.ecommerce.enums.UserRole;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -16,5 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	User findByRole(UserRole userRole);
 
-	
+
 }

@@ -1,12 +1,12 @@
-package com.ecom.ecommerce.services.auth;
+package com.ecommerce.services.auth;
 
-import com.ecom.ecommerce.dto.SignupRequest;
-import com.ecom.ecommerce.dto.UserDto;
+import com.ecommerce.dto.SignupRequest;
+import com.ecommerce.dto.UserDto;
 
 public interface AuthService {
-	
+
 	UserDto createUser(SignupRequest signupRequest);
-	
+
 	Boolean hasUserWithEmail(String email);
 
 }
