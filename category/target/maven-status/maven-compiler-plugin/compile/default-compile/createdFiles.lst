@@ -1,0 +1,9 @@
+com\ecommerce\category\config\SimplecorsFilter.class
+com\ecommerce\category\services\CategorySeviceImpl.class
+com\ecommerce\category\CategoryApplication.class
+com\ecommerce\category\repository\CategoryRepo.class
+com\ecommerce\category\controller\CategoryController.class
+com\ecommerce\category\services\CategoryService.class
+com\ecommerce\category\Dto\CategoryDto.class
+com\ecommerce\category\entity\Product.class
+com\ecommerce\category\entity\Category.class
