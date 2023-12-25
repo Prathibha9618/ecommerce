@@ -1,4 +1,3 @@
-import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
 const TOKEN = 'ecom-token';
@@ -51,10 +50,11 @@ export class UserStorageService {
       return false;
     }
     const role:string = this.getUserRole();
-    return role =='CUSTOMER';
+    return role =='CUSTOMERS';
   }
   static signout():void{
     window.localStorage.removeItem(TOKEN);
     window.localStorage.removeItem(USER);
   }
+  
 }

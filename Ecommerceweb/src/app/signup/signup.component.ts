@@ -43,7 +43,9 @@ export class SignupComponent {
       return;
     }
     this.authService.register(this.signupForm.value).subscribe(
+
       (Response) =>{
+        console.log('register',Response);
         this.snackbar.open('sign up successful','Close',{duration:5000});
         this.router.navigateByUrl("/login");
 

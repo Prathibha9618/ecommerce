@@ -40,21 +40,23 @@ export class LoginComponent {
       const password = this.loginForm.get('password')?.value;
 
 
-    this.authService.login(username,password).subscribe(
-      (res) =>{
-       if(UserStorageService.isAdminLoggedIn()){
-          this.router.navigateByUrl('admin/dashboard');
+      this.authService.login(username, password).subscribe(
+        (res) => {
+          console.log('Login successful:', res);
 
+          if (UserStorageService.isAdminLoggedIn()) {
+            console.log('Redirecting to admin dashboard');
+            this.router.navigateByUrl('admin/dashboard');
+          } else if (UserStorageService.isCustomerLoggedIn()) {
+            console.log('Redirecting to customer dashboard');
+            this.router.navigateByUrl('customer/dashboard');
+          }
+        },
+        (error) => {
+          console.error('Login error:', error);
+          this.snackbar.open('Bad credentials', 'Error', { duration: 5000 });
         }
-        else if(UserStorageService.isCustomerLoggedIn()){
-          this.router.navigateByUrl('customer/dashboard');
-        }
-
-      },
-      (error)=>{
-        this.snackbar.open('bad credentials','Error',{duration:5000});
-      }
-    )
+      );
 
     }
   }
