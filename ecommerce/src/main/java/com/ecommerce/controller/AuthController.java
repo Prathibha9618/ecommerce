@@ -13,14 +13,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.dto.AuthenticationRequest;
 import com.ecommerce.dto.SignupRequest;
 import com.ecommerce.dto.UserDto;
 import com.ecommerce.entity.User;
+import com.ecommerce.enums.UserRole;
 import com.ecommerce.repository.UserRepository;
 import com.ecommerce.services.auth.AuthService;
 import com.ecommerce.utils.Jwtutil;
@@ -46,6 +50,8 @@ public class AuthController {
 	public static final String HEADER_STRING ="Authorization";
 
 	public static final String Token_PREFIX ="Bearer";
+	
+	
 
 
 	@PostMapping("/authenticate")
@@ -88,7 +94,8 @@ public class AuthController {
 		 System.out.println("User registered successfully");
 		return new ResponseEntity<>(userDto,HttpStatus.OK);
 	}
-
+	
+	 
 	}
 
 

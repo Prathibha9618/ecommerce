@@ -1,4 +1,4 @@
-package com.ecommerce.config;
+package com.ecommerce.category.config;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,14 +17,14 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimplecorsFilter implements Filter{
-
+	
 	@Value("${app.client.url}")
     private String clientAppUrl = "";
+
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -32,21 +32,18 @@ public class SimplecorsFilter implements Filter{
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         Map<String, String> map = new HashMap<>();
-        
         String originHeader = request.getHeader("origin");
-        response.setHeader("Access-Control-Allow-Origin", originHeader);
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         
-        System.out.println("CORS Filter invoked");
-       
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             chain.doFilter(req, res);
-        }
+        }  
     }
 
     @Override
@@ -57,5 +54,3 @@ public class SimplecorsFilter implements Filter{
     public void destroy() {
     }
 }
-
-

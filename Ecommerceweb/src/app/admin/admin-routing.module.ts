@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { PostCategoryComponent } from './component/post-category/post-category.component';
+import { PostproductComponent } from './component/postproduct/postproduct.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'category', component: PostCategoryComponent }];
+  { path: 'category', component: PostCategoryComponent },
+  { path: 'product', component: PostproductComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

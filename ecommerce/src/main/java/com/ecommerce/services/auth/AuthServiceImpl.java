@@ -1,8 +1,15 @@
 package com.ecommerce.services.auth;
 
+
+import com.ecommerce.admin.entity.Order;
+import com.ecommerce.admin.enums.Orderstatus;
+import com.ecommerce.admin.repository.OrderRepo;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.dto.SignupRequest;
 import com.ecommerce.dto.UserDto;
@@ -20,6 +27,12 @@ public class AuthServiceImpl implements AuthService{
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
+	@Autowired
+    private OrderRepo orderRepo;
+
+
 
 	@Override
 	public UserDto createUser(SignupRequest signupRequest) {
@@ -32,6 +45,14 @@ public class AuthServiceImpl implements AuthService{
 		System.out.print(signupRequest.getName());
 		System.out.print(signupRequest.getPassword());
 		User createdUser = userRepository.save(user);
+		
+		Order order= new Order();
+		order.setAmount(0L);
+		order.setTotalAmount(0L);
+		order.setDiscount(0L);
+		order.setUser(createdUser);
+		order.setOrderStatus(Orderstatus.pending);
+		orderRepo.save(order);
 
 		System.out.println(createdUser);
 		UserDto userDto = new UserDto();
@@ -58,6 +79,7 @@ public class AuthServiceImpl implements AuthService{
 			System.out.println("enter");
 		}
 	}
+	
 
 
 

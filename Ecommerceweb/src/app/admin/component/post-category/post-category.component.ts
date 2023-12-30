@@ -30,7 +30,7 @@ export class PostCategoryComponent {
   adminCategory():void{
     console.log('Entering adminCategory method');
     if(this.categoryForm.valid){
-
+console.log("valid");
       this.adminService.addCategory(this.categoryForm.value).subscribe((res)=>{
         console.log('HTTP request successful:', res);
 

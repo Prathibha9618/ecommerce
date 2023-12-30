@@ -1,15 +1,14 @@
-package com.ecommerce;
+package com.ecommerce.category;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 
-public class EcommerceApplication {
+public class CategoryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcommerceApplication.class, args);
+		SpringApplication.run(CategoryApplication.class, args);
 	}
 
 }
